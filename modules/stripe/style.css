@@ -1,0 +1,18 @@
+.wfp .wfp-stripe .wfp-form-control-wrap {
+	margin: .6em 0;
+}
+
+.wfp .wfp-stripe .wfp-form-control {
+	display: block;
+	background: #f6f7f7;
+	padding: 12px 12px;
+	border: 1px solid #787c82;
+}
+
+.wfp .wfp-stripe button:disabled {
+	cursor: not-allowed;
+}
+
+.wfp .wfp-stripe .hidden {
+	display: none;
+}

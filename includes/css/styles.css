@@ -1,0 +1,159 @@
+.wfp .screen-reader-response {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	word-wrap: normal !important;
+}
+
+.wfp form .wfp-response-output {
+	margin: 2em 0.5em 1em;
+	padding: 0.2em 1em;
+	border: 2px solid #00a0d2; /* Blue */
+}
+
+.wfp form.init .wfp-response-output,
+.wfp form.resetting .wfp-response-output,
+.wfp form.submitting .wfp-response-output {
+	display: none;
+}
+
+.wfp form.sent .wfp-response-output {
+	border-color: #46b450; /* Green */
+}
+
+.wfp form.failed .wfp-response-output,
+.wfp form.aborted .wfp-response-output {
+	border-color: #dc3232; /* Red */
+}
+
+.wfp form.spam .wfp-response-output {
+	border-color: #f56e28; /* Orange */
+}
+
+.wfp form.invalid .wfp-response-output,
+.wfp form.unaccepted .wfp-response-output,
+.wfp form.payment-required .wfp-response-output {
+	border-color: #ffb900; /* Yellow */
+}
+
+.wfp-form-control-wrap {
+	position: relative;
+}
+
+.wfp-not-valid-tip {
+	color: #dc3232; /* Red */
+	font-size: 1em;
+	font-weight: normal;
+	display: block;
+}
+
+.use-floating-validation-tip .wfp-not-valid-tip {
+	position: relative;
+	top: -2ex;
+	left: 1em;
+	z-index: 100;
+	border: 1px solid #dc3232;
+	background: #fff;
+	padding: .2em .8em;
+	width: 24em;
+}
+
+.wfp-list-item {
+	display: inline-block;
+	margin: 0 0 0 1em;
+}
+
+.wfp-list-item-label::before,
+.wfp-list-item-label::after {
+	content: " ";
+}
+
+.wfp-spinner {
+	visibility: hidden;
+	display: inline-block;
+	background-color: #23282d; /* Dark Gray 800 */
+	opacity: 0.75;
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 100%;
+	padding: 0;
+	margin: 0 24px;
+	position: relative;
+}
+
+form.submitting .wfp-spinner {
+	visibility: visible;
+}
+
+.wfp-spinner::before {
+	content: '';
+	position: absolute;
+	background-color: #fbfbfc; /* Light Gray 100 */
+	top: 4px;
+	left: 4px;
+	width: 6px;
+	height: 6px;
+	border: none;
+	border-radius: 100%;
+	transform-origin: 8px 8px;
+	animation-name: spin;
+	animation-duration: 1000ms;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wfp-spinner::before {
+		animation-name: blink;
+		animation-duration: 2000ms;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes blink {
+	from {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+.wfp input[type="file"] {
+	cursor: pointer;
+}
+
+.wfp input[type="file"]:disabled {
+	cursor: default;
+}
+
+.wfp .wfp-submit:disabled {
+	cursor: not-allowed;
+}
+
+.wfp input[type="url"],
+.wfp input[type="email"],
+.wfp input[type="tel"] {
+	direction: ltr;
+}

@@ -1,0 +1,11 @@
+.wfp-not-valid-tip {
+	direction: rtl;
+}
+
+.use-floating-validation-tip .wfp-not-valid-tip {
+	right: 1em;
+}
+
+.wfp-list-item {
+	margin: 0 1em 0 0;
+}
