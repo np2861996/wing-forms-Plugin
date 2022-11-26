@@ -66,7 +66,7 @@ function wfp_editor_panel_form( $post ) {
 <h2><?php echo esc_html( __( 'Form', 'wing-forms' ) ); ?></h2>
 
 <fieldset>
-<legend><?php echo $description; ?></legend>
+<legend><?php echo esc_html($description); ?></legend>
 
 <?php
 	$tag_generator = WFP_TagGenerator::get_instance();
@@ -114,13 +114,13 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 	) );
 
 ?>
-<div class="wing-form-editor-box-mail" id="<?php echo $id; ?>">
+<div class="wing-form-editor-box-mail" id="<?php echo esc_attr($id); ?>">
 <h2><?php echo esc_html( $args['title'] ); ?></h2>
 
 <?php
 	if ( ! empty( $args['use'] ) ) :
 ?>
-<label for="<?php echo $id; ?>-active"><input type="checkbox" id="<?php echo $id; ?>-active" name="<?php echo $id; ?>[active]" class="toggle-form-table" value="1"<?php echo ( $mail['active'] ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( $args['use'] ); ?></label>
+<label for="<?php echo esc_attr($id); ?>-active"><input type="checkbox" id="<?php echo esc_attr($id); ?>-active" name="<?php echo esc_attr($id); ?>[active]" class="toggle-form-table" value="1"<?php echo ( $mail['active'] ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( $args['use'] ); ?></label>
 <p class="description"><?php echo esc_html( __( "Mail (2) is an additional mail template often used as an autoresponder.", 'wing-forms' ) ); ?></p>
 <?php
 	endif;
@@ -134,7 +134,7 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 		__( 'Setting up mail', 'wing-forms' ) );
 	$description = __( "You can edit the mail template here. For details, see %s.", 'wing-forms' );
 	$description = sprintf( esc_html( $description ), $desc_link );
-	echo $description;
+	echo esc_html($description);
 	echo '<br />';
 
 	echo esc_html( __( "In the following fields, you can use these mail-tags:",
@@ -147,59 +147,59 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 <tbody>
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-recipient"><?php echo esc_html( __( 'To', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_attr($id); ?>-recipient"><?php echo esc_html( __( 'To', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<input type="text" id="<?php echo $id; ?>-recipient" name="<?php echo $id; ?>[recipient]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['recipient'] ); ?>" data-config-field="<?php echo sprintf( '%s.recipient', esc_attr( $args['name'] ) ); ?>" />
+		<input type="text" id="<?php echo esc_attr($id); ?>-recipient" name="<?php echo esc_attr($id); ?>[recipient]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['recipient'] ); ?>" data-config-field="<?php echo sprintf( '%s.recipient', esc_attr( $args['name'] ) ); ?>" />
 	</td>
 	</tr>
 
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-sender"><?php echo esc_html( __( 'From', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_attr($id); ?>-sender"><?php echo esc_html( __( 'From', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<input type="text" id="<?php echo $id; ?>-sender" name="<?php echo $id; ?>[sender]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['sender'] ); ?>" data-config-field="<?php echo sprintf( '%s.sender', esc_attr( $args['name'] ) ); ?>" />
+		<input type="text" id="<?php echo esc_attr($id); ?>-sender" name="<?php echo esc_attr($id); ?>[sender]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['sender'] ); ?>" data-config-field="<?php echo sprintf( '%s.sender', esc_attr( $args['name'] ) ); ?>" />
 	</td>
 	</tr>
 
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-subject"><?php echo esc_html( __( 'Subject', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_html($id); ?>-subject"><?php echo esc_html( __( 'Subject', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<input type="text" id="<?php echo $id; ?>-subject" name="<?php echo $id; ?>[subject]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['subject'] ); ?>" data-config-field="<?php echo sprintf( '%s.subject', esc_attr( $args['name'] ) ); ?>" />
+		<input type="text" id="<?php echo esc_html($id); ?>-subject" name="<?php echo esc_html($id); ?>[subject]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['subject'] ); ?>" data-config-field="<?php echo sprintf( '%s.subject', esc_attr( $args['name'] ) ); ?>" />
 	</td>
 	</tr>
 
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-additional-headers"><?php echo esc_html( __( 'Additional headers', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_html($id); ?>-additional-headers"><?php echo esc_html( __( 'Additional headers', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<textarea id="<?php echo $id; ?>-additional-headers" name="<?php echo $id; ?>[additional_headers]" cols="100" rows="4" class="large-text code" data-config-field="<?php echo sprintf( '%s.additional_headers', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['additional_headers'] ); ?></textarea>
+		<textarea id="<?php echo esc_attr($id); ?>-additional-headers" name="<?php echo esc_attr($id); ?>[additional_headers]" cols="100" rows="4" class="large-text code" data-config-field="<?php echo sprintf( '%s.additional_headers', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['additional_headers'] ); ?></textarea>
 	</td>
 	</tr>
 
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-body"><?php echo esc_html( __( 'Message body', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_attr($id); ?>-body"><?php echo esc_html( __( 'Message body', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<textarea id="<?php echo $id; ?>-body" name="<?php echo $id; ?>[body]" cols="100" rows="18" class="large-text code" data-config-field="<?php echo sprintf( '%s.body', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['body'] ); ?></textarea>
+		<textarea id="<?php echo esc_attr($id); ?>-body" name="<?php echo esc_attr($id); ?>[body]" cols="100" rows="18" class="large-text code" data-config-field="<?php echo sprintf( '%s.body', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['body'] ); ?></textarea>
 
-		<p><label for="<?php echo $id; ?>-exclude-blank"><input type="checkbox" id="<?php echo $id; ?>-exclude-blank" name="<?php echo $id; ?>[exclude_blank]" value="1"<?php echo ( ! empty( $mail['exclude_blank'] ) ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( __( 'Exclude lines with blank mail-tags from output', 'wing-forms' ) ); ?></label></p>
+		<p><label for="<?php echo esc_attr($id); ?>-exclude-blank"><input type="checkbox" id="<?php echo esc_attr($id); ?>-exclude-blank" name="<?php echo esc_attr($id); ?>[exclude_blank]" value="1"<?php echo ( ! empty( $mail['exclude_blank'] ) ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( __( 'Exclude lines with blank mail-tags from output', 'wing-forms' ) ); ?></label></p>
 
-		<p><label for="<?php echo $id; ?>-use-html"><input type="checkbox" id="<?php echo $id; ?>-use-html" name="<?php echo $id; ?>[use_html]" value="1"<?php echo ( $mail['use_html'] ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( __( 'Use HTML content type', 'wing-forms' ) ); ?></label></p>
+		<p><label for="<?php echo esc_attr($id); ?>-use-html"><input type="checkbox" id="<?php echo esc_attr($id); ?>-use-html" name="<?php echo esc_attr($id); ?>[use_html]" value="1"<?php echo ( $mail['use_html'] ) ? ' checked="checked"' : ''; ?> /> <?php echo esc_html( __( 'Use HTML content type', 'wing-forms' ) ); ?></label></p>
 	</td>
 	</tr>
 
 	<tr>
 	<th scope="row">
-		<label for="<?php echo $id; ?>-attachments"><?php echo esc_html( __( 'File attachments', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_attr($id); ?>-attachments"><?php echo esc_html( __( 'File attachments', 'wing-forms' ) ); ?></label>
 	</th>
 	<td>
-		<textarea id="<?php echo $id; ?>-attachments" name="<?php echo $id; ?>[attachments]" cols="100" rows="4" class="large-text code" data-config-field="<?php echo sprintf( '%s.attachments', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['attachments'] ); ?></textarea>
+		<textarea id="<?php echo esc_attr($id); ?>-attachments" name="<?php echo esc_attr($id); ?>[attachments]" cols="100" rows="4" class="large-text code" data-config-field="<?php echo sprintf( '%s.attachments', esc_attr( $args['name'] ) ); ?>"><?php echo esc_textarea( $mail['attachments'] ); ?></textarea>
 	</td>
 	</tr>
 </tbody>
@@ -226,7 +226,7 @@ function wfp_editor_panel_messages( $post ) {
 ?>
 <h2><?php echo esc_html( __( 'Messages', 'wing-forms' ) ); ?></h2>
 <fieldset>
-<legend><?php echo $description; ?></legend>
+<legend><?php echo esc_attr($description); ?></legend>
 <?php
 
 	foreach ( $messages as $key => $arr ) {
@@ -235,8 +235,8 @@ function wfp_editor_panel_messages( $post ) {
 
 ?>
 <p class="description">
-<label for="<?php echo $field_id; ?>"><?php echo esc_html( $arr['description'] ); ?><br />
-<input type="text" id="<?php echo $field_id; ?>" name="<?php echo $field_name; ?>" class="large-text" size="70" value="<?php echo esc_attr( $post->message( $key, false ) ); ?>" data-config-field="<?php echo sprintf( 'messages.%s', esc_attr( $key ) ); ?>" />
+<label for="<?php echo esc_attr($field_id); ?>"><?php echo esc_html( $arr['description'] ); ?><br />
+<input type="text" id="<?php echo esc_attr($field_id); ?>" name="<?php echo esc_attr($field_name); ?>" class="large-text" size="70" value="<?php echo esc_attr( $post->message( $key, false ) ); ?>" data-config-field="<?php echo sprintf( 'messages.%s', esc_attr( $key ) ); ?>" />
 </label>
 </p>
 <?php
@@ -256,7 +256,7 @@ function wfp_editor_panel_additional_settings( $post ) {
 ?>
 <h2><?php echo esc_html( __( 'Additional Settings', 'wing-forms' ) ); ?></h2>
 <fieldset>
-<legend><?php echo $description; ?></legend>
+<legend><?php echo esc_attr($description); ?></legend>
 <textarea id="wfp-additional-settings" name="wfp-additional-settings" cols="100" rows="8" class="large-text" data-config-field="additional_settings.body"><?php echo esc_textarea( $post->prop( 'additional_settings' ) ); ?></textarea>
 </fieldset>
 <?php

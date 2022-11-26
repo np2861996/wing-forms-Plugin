@@ -109,7 +109,8 @@ function wfp_stripe_skip_spam_check( $skip_spam_check, $submission ) {
 	}
 
 	if ( ! empty( $_POST['_wfp_stripe_payment_intent'] ) ) {
-		$pi_id = trim( $_POST['_wfp_stripe_payment_intent'] );
+		$s_wfp_stripe_payment_intent = sanitize_text_field($_POST['_wfp_stripe_payment_intent']);
+		$pi_id = trim( $s_wfp_stripe_payment_intent );
 		$payment_intent = $service->api()->retrieve_payment_intent( $pi_id );
 
 		if ( isset( $payment_intent['status'] )

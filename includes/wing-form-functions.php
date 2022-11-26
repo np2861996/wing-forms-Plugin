@@ -93,7 +93,9 @@ function wfp_get_hangover( $name, $default_value = null ) {
 		return $default_value;
 	}
 
-	return isset( $_POST[$name] ) ? wp_unslash( $_POST[$name] ) : $default_value;
+	$sformfuncname = sanitize_text_field($_POST[$name]);
+
+	return isset( $sformfuncname ) ? wp_unslash( $sformfuncname ) : sanitize_text_field($default_value);
 }
 
 

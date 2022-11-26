@@ -136,7 +136,7 @@ class WFP_Integration {
 				array_flip( $service->get_categories() )
 			);
 ?>
-<div class="card<?php echo $service->is_active() ? ' active' : ''; ?>" id="<?php echo esc_attr( $name ); ?>">
+<div class="card<?php echo esc_attr($service->is_active()) ? ' active' : ''; ?>" id="<?php echo esc_attr( $name ); ?>">
 <?php $service->icon(); ?>
 <h2 class="title"><?php echo esc_html( $service->get_title() ); ?></h2>
 <div class="infobox">
@@ -248,7 +248,9 @@ class WFP_Service_OAuth2 extends WFP_Service {
 
 	public function load( $action = '' ) {
 		if ( 'auth_redirect' == $action ) {
-			$code = isset( $_GET['code'] ) ? $_GET['code'] : '';
+
+			$scode = sanitize_text_field($_GET['code']);
+			$code = isset( $scode ) ? $scode : '';
 
 			if ( $code ) {
 				$this->request_token( $code );

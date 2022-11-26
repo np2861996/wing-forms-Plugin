@@ -18,7 +18,8 @@ class WFP_SWV_FileRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_FILES[$field]['name'] ) ? $_FILES[$field]['name'] : '';
+		$sfilefield = sanitize_text_field($_FILES[$field]['name']);
+		$input = isset( $sfilefield ) ? $sfilefield : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 

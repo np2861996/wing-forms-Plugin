@@ -107,9 +107,13 @@ class WFP_Stripe extends WFP_Service {
 				$this->reset_data();
 				$redirect_to = $this->menu_page_url( 'action=setup' );
 			} else {
-				$publishable = isset( $_POST['publishable'] ) ?
-					trim( $_POST['publishable'] ) : '';
-				$secret = isset( $_POST['secret'] ) ? trim( $_POST['secret'] ) : '';
+
+				$spublishable = sanitize_text_field($_POST['publishable']);
+				$publishable = isset( $spublishable ) ?
+					trim( $spublishable ) : '';
+
+				$ssecret = sanitize_text_field($_POST['secret']);
+				$secret = isset( $ssecret ) ? trim( $ssecret ) : '';
 
 				if ( $publishable and $secret ) {
 					$this->api_keys = array(

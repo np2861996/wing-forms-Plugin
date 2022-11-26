@@ -173,11 +173,11 @@ function wfp_constant_wing_editor_panels( $panels ) {
 <h2><?php echo esc_html( __( 'Constant Wing', 'wing-forms' ) ); ?></h2>
 
 <fieldset>
-	<legend><?php echo $description; ?></legend>
+	<legend><?php echo esc_attr($description); ?></legend>
 
 	<table class="form-table" role="presentation">
 		<tbody>
-			<tr class="<?php echo $prop['enable_wing_list'] ? '' : 'inactive'; ?>">
+			<tr class="<?php echo esc_attr($prop['enable_wing_list']) ? '' : 'inactive'; ?>">
 				<th scope="row">
 		<?php
 

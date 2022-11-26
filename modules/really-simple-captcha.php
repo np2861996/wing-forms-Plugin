@@ -166,7 +166,7 @@ function wfp_captcha_validation_filter( $result, $tag ) {
 	$name = $tag->name;
 
 	$captchac = '_wfp_captcha_challenge_' . $name;
-
+	
 	$prefix = isset( $_POST[$captchac] ) ? (string) $_POST[$captchac] : '';
 	$response = isset( $_POST[$name] ) ? (string) $_POST[$name] : '';
 	$response = wfp_canonicalize( $response );

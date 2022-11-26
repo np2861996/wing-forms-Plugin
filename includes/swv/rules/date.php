@@ -18,7 +18,8 @@ class WFP_SWV_DateRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_POST[$field] ) ? $_POST[$field] : '';
+		$s_field = sanitize_text_field($_POST[$field]);
+		$input = isset( $s_field ) ? $s_field : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 

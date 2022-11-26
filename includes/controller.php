@@ -18,8 +18,11 @@ function wfp_control_init() {
 		return;
 	}
 
-	if ( isset( $_POST['_wfp'] ) ) {
-		$wing_form = wfp_wing_form( (int) $_POST['_wfp'] );
+	
+
+	if ( isset( $s_wfp ) ) {
+		$s_wfp = sanitize_text_field($_POST['_wfp']);
+		$wing_form = wfp_wing_form( (int) $s_wfp );
 
 		if ( $wing_form ) {
 			$wing_form->submit();

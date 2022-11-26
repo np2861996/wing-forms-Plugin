@@ -121,7 +121,8 @@ function wfp_acceptance_validation_filter( $result, $tag ) {
 	}
 
 	$name = $tag->name;
-	$value = ( ! empty( $_POST[$name] ) ? 1 : 0 );
+	$sname = sanitize_text_field($_POST[$name]);
+	$value = ( ! empty( $sname ) ? 1 : 0 );
 
 	$invert = $tag->has_option( 'invert' );
 
@@ -142,7 +143,7 @@ function wfp_acceptance_filter( $accepted, $submission ) {
 	$tags = wfp_scan_form_tags( array( 'type' => 'acceptance' ) );
 
 	foreach ( $tags as $tag ) {
-		$name = $tag->name;
+		$name = sanitize_text_field($tag->name);
 
 		if ( empty( $name ) ) {
 			continue;
@@ -295,7 +296,7 @@ function wfp_tag_generator_acceptance( $wing_form, $args = '' ) {
 </div>
 
 <div class="insert-box">
-	<input type="text" name="<?php echo $type; ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+	<input type="text" name="<?php echo esc_attr($type); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 	<div class="submitbox">
 	<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'wing-forms' ) ); ?>" />

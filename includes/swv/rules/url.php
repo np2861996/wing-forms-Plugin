@@ -18,7 +18,8 @@ class WFP_SWV_URLRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_POST[$field] ) ? $_POST[$field] : '';
+		$field7 = sanitize_text_field($_POST[$field]);
+		$input = isset( $field7 ) ? $field7 : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 

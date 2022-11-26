@@ -485,11 +485,14 @@ class WFP_WingForm {
 			return false;
 		}
 
-		if ( empty( $_POST['_wfp_unit_tag'] ) ) {
+		$s_wfp_unit_tag = sanitize_text_field($_POST['_wfp_unit_tag']);
+		
+
+		if ( empty( $s_wfp_unit_tag ) ) {
 			return false;
 		}
 
-		return $this->unit_tag() === $_POST['_wfp_unit_tag'];
+		return $this->unit_tag() === $s_wfp_unit_tag;
 	}
 
 

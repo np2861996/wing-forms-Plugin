@@ -541,8 +541,10 @@ class WFP_Submission {
 	 *                  false if $hash is invalid.
 	 */
 	public function verify_posted_data_hash( $hash = '' ) {
-		if ( '' === $hash and ! empty( $_POST['_wfp_posted_data_hash'] ) ) {
-			$hash = trim( $_POST['_wfp_posted_data_hash'] );
+
+		$S_wfp_posted_data_hash = sanitize_text_field($_POST['_wfp_posted_data_hash']);
+		if ( '' === $hash and ! empty( $S_wfp_posted_data_has ) ) {
+			$hash = trim( $S_wfp_posted_data_has );
 		}
 
 		if ( '' === $hash ) {
@@ -754,7 +756,9 @@ class WFP_Submission {
 			return true;
 		}
 
-		$nonce = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
+		$s_wpnonce = sanitize_text_field($_POST['_wpnonce']);
+
+		$nonce = isset( $s_wpnonce ) ? $s_wpnonce : '';
 
 		return wfp_verify_nonce( $nonce );
 	}

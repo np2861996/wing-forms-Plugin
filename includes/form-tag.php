@@ -358,7 +358,7 @@ class WFP_FormTag implements ArrayAccess {
 				}
 
 			} elseif ( 'get' === $opt and isset( $_GET[$this->name] ) ) {
-				$vals = (array) $_GET[$this->name];
+				$vals = (array) sanitize_text_field($_GET[$this->name]);
 				$vals = array_map( 'wfp_sanitize_query_var', $vals );
 
 				if ( $args['multiple'] ) {
@@ -372,7 +372,7 @@ class WFP_FormTag implements ArrayAccess {
 				}
 
 			} elseif ( 'post' === $opt and isset( $_POST[$this->name] ) ) {
-				$vals = (array) $_POST[$this->name];
+				$vals = (array) sanitize_text_field($_POST[$this->name]);
 				$vals = array_map( 'wfp_sanitize_query_var', $vals );
 
 				if ( $args['multiple'] ) {

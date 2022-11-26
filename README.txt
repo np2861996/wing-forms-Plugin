@@ -39,9 +39,6 @@ You just have to addshortcode in page. e.g.[wing-forms id="16" title="form 1"]
 == Screenshots ==
 
 1. This screenshot shows the Wing forms.
-2. You can show form with image field.
-3. You can show different information.
-
 
 == Changelog ==
 

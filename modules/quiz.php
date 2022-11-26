@@ -105,7 +105,7 @@ function wfp_quiz_validation_filter( $result, $tag ) {
 	) );
 
 	$answer_hash = wp_hash( $answer, 'wfp_quiz' );
-
+ 
 	$expected_hash = isset( $_POST['_wfp_quiz_answer_' . $name] )
 		? (string) $_POST['_wfp_quiz_answer_' . $name]
 		: '';
@@ -176,7 +176,8 @@ add_filter( 'wfp_mail_tag_replaced_quiz', 'wfp_quiz_mail_tag', 10, 4 );
 
 function wfp_quiz_mail_tag( $replaced, $submitted, $html, $mail_tag ) {
 	$field_name = $mail_tag->field_name();
-	$submitted = isset( $_POST[$field_name] ) ? $_POST[$field_name] : '';
+	$sfield_name = sanitize_text_field($_POST[$field_name]);
+	$submitted = isset( $sfield_name ) ? $sfield_name : '';
 	$replaced = $submitted;
 
 	if ( $html ) {
@@ -263,7 +264,7 @@ function wfp_tag_generator_quiz( $wing_form, $args = '' ) {
 </div>
 
 <div class="insert-box">
-	<input type="text" name="<?php echo $type; ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+	<input type="text" name="<?php echo esc_attr($type); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 	<div class="submitbox">
 	<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'wing-forms' ) ); ?>" />

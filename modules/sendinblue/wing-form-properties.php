@@ -109,11 +109,11 @@ function wfp_sendinblue_editor_panels( $panels ) {
 <h2><?php echo esc_html( __( 'Sendinblue', 'wing-forms' ) ); ?></h2>
 
 <fieldset>
-	<legend><?php echo $description; ?></legend>
+	<legend><?php echo esc_attr($description); ?></legend>
 
 	<table class="form-table" role="presentation">
 		<tbody>
-			<tr class="<?php echo $prop['enable_wing_list'] ? '' : 'inactive'; ?>">
+			<tr class="<?php echo esc_attr($prop['enable_wing_list']) ? '' : 'inactive'; ?>">
 				<th scope="row">
 		<?php
 
@@ -198,7 +198,7 @@ function wfp_sendinblue_editor_panels( $panels ) {
 		?>
 				</td>
 			</tr>
-			<tr class="<?php echo $prop['enable_transactional_email'] ? '' : 'inactive'; ?>">
+			<tr class="<?php echo esc_attr($prop['enable_transactional_email']) ? '' : 'inactive'; ?>">
 				<th scope="row">
 		<?php
 

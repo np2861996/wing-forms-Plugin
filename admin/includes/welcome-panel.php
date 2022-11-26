@@ -31,8 +31,8 @@ abstract class WFP_WelcomePanelColumn {
 
 		echo "\n";
 		echo '<div class="welcome-panel-column">';
-		echo $title;
-		echo $content;
+		echo esc_html($title);
+		echo esc_html($content);
 		echo '</div>';
 	}
 }
@@ -248,7 +248,9 @@ function wfp_admin_ajax_welcome_panel() {
 		$vers = array();
 	}
 
-	if ( empty( $_POST['visible'] ) ) {
+	$svisible = sanitize_text_field($_POST['visible']);
+
+	if ( empty( $svisible ) ) {
 		$vers[] = wfp_version( 'only_major=1' );
 	} else {
 		$vers = array_diff( $vers, array( wfp_version( 'only_major=1' ) ) );

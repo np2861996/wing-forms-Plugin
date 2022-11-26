@@ -18,7 +18,8 @@ class WFP_SWV_NumberRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_POST[$field] ) ? $_POST[$field] : '';
+		$input_6 = sanitize_text_field($_POST[$field]);
+		$input = isset( $input_6 ) ? $input_6 : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 

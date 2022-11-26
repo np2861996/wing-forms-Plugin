@@ -134,8 +134,9 @@ function wfp_recaptcha_verify_response( $spam, $submission ) {
 		return $spam;
 	}
 
-	$token = isset( $_POST['_wfp_recaptcha_response'] )
-		? trim( $_POST['_wfp_recaptcha_response'] ) : '';
+	$s_wfp_recaptcha_response = sanitize_text_field($_POST['_wfp_recaptcha_response']);
+	$token = isset( $s_wfp_recaptcha_response )
+		? trim( $s_wfp_recaptcha_response ) : '';
 
 	if ( $service->verify( $token ) ) { // Human
 		$spam = false;

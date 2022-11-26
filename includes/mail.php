@@ -373,8 +373,11 @@ class WFP_MailTaggedText {
 			: null;
 
 		if ( $mail_tag->get_option( 'do_not_heat' ) ) {
-			$submitted = isset( $_POST[$field_name] )
-				? wp_unslash( $_POST[$field_name] )
+
+			$smail_field_name = sanitize_text_field($_POST[$field_name]);
+
+			$submitted = isset( $smail_field_name )
+				? wp_unslash( $smail_field_name )
 				: '';
 		}
 

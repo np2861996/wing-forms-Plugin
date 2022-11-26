@@ -57,16 +57,20 @@ class WFP_ConstantWing extends WFP_Service_OAuth2 {
 	}
 
 	public function auth_redirect() {
-		$auth = isset( $_GET['auth'] ) ? trim( $_GET['auth'] ) : '';
+		$sauth = sanitize_text_field($_GET['auth']);
+		$auth = isset( $sauth ) ? trim( $sauth ) : '';
 
 		if ( self::service_name === $auth
 		and current_user_can( 'wfp_manage_integration' ) ) {
+
+			$scode = sanitize_text_field($_GET['code']);
+			$sstate = sanitize_text_field($_GET['state']);
 			$redirect_to = add_query_arg(
 				array(
 					'service' => self::service_name,
 					'action' => 'auth_redirect',
-					'code' => isset( $_GET['code'] ) ? trim( $_GET['code'] ) : '',
-					'state' => isset( $_GET['state'] ) ? trim( $_GET['state'] ) : '',
+					'code' => isset( $scode ) ? trim( $scode ) : '',
+					'state' => isset( $sstate ) ? trim( $sstate ) : '',
 				),
 				menu_page_url( 'wfp-integration', false )
 			);
@@ -165,14 +169,18 @@ class WFP_ConstantWing extends WFP_Service_OAuth2 {
 		if ( 'setup' == $action and 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 			check_admin_referer( 'wfp-constant-wing-setup' );
 
+
 			if ( ! empty( $_POST['reset'] ) ) {
 				$this->reset_data();
 			} else {
-				$this->client_id = isset( $_POST['client_id'] )
-					? trim( $_POST['client_id'] ) : '';
 
-				$this->client_secret = isset( $_POST['client_secret'] )
-					? trim( $_POST['client_secret'] ) : '';
+				$sclient_id = sanitize_text_field($_POST['client_id']);
+				$this->client_id = isset( $sclient_id )
+					? trim( $sclient_id ) : '';
+
+				$sclient_secret = sanitize_text_field($_POST['client_secret']);
+				$this->client_secret = isset( $sclient_secret )
+					? trim( $sclient_secret ) : '';
 
 				$this->save_data();
 				$this->authorize( 'wing_data offline_access' );

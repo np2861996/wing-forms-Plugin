@@ -133,6 +133,8 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 		WFP_VERSION, true
 	);
 
+	$sactivetab = sanitize_text_field($_GET['active-tab']);
+
 	$args = array(
 		'apiSettings' => array(
 			'root' => esc_url_raw( rest_url( 'wing-forms/v1' ) ),
@@ -144,8 +146,8 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 		'saveAlert' => __(
 			"The changes you made will be lost if you navigate away from this page.",
 			'wing-forms' ),
-		'activeTab' => isset( $_GET['active-tab'] )
-			? (int) $_GET['active-tab'] : 0,
+		'activeTab' => isset( $sactivetab )
+			? (int) $sactivetab : 0,
 		'configValidator' => array(
 			'errors' => array(),
 			'howToCorrect' => __( "How to resolve?", 'wing-forms' ),
@@ -203,13 +205,16 @@ function wfp_load_wing_form_admin() {
 
 	$action = wfp_current_action();
 
+	$sgetpage = sanitize_text_field($_GET['page']);
+
 	do_action( 'wfp_admin_load',
-		isset( $_GET['page'] ) ? trim( $_GET['page'] ) : '',
+		isset( $sgetpage ) ? trim( $sgetpage ) : '',
 		$action
 	);
 
 	if ( 'save' == $action ) {
-		$id = isset( $_POST['post_ID'] ) ? $_POST['post_ID'] : '-1';
+		$spost_ID = sanitize_text_field($_POST['post_ID']);
+		$id = isset( $spost_ID ) ? $spost_ID : '-1';
 		check_admin_referer( 'wfp-save-wing-form_' . $id );
 
 		if ( ! current_user_can( 'wfp_edit_wing_form', $id ) ) {
@@ -221,26 +226,33 @@ function wfp_load_wing_form_admin() {
 		$args = $_REQUEST;
 		$args['id'] = $id;
 
-		$args['title'] = isset( $_POST['post_title'] )
-			? $_POST['post_title'] : null;
+		$spost_title = sanitize_text_field($_POST['post_title']);
+		$args['title'] = isset( $spost_title )
+			? $spost_title : null;
 
-		$args['locale'] = isset( $_POST['wfp-locale'] )
-			? $_POST['wfp-locale'] : null;
+		$swfplocale = sanitize_text_field($_POST['wfp-locale']);
+		$args['locale'] = isset( $swfplocale )
+			? $swfplocale : null;
 
-		$args['form'] = isset( $_POST['wfp-form'] )
-			? $_POST['wfp-form'] : '';
+		$swfpform = sanitize_text_field($_POST['wfp-form']);
+		$args['form'] = isset( $swfpform )
+			? $swfpform : '';
 
-		$args['mail'] = isset( $_POST['wfp-mail'] )
-			? $_POST['wfp-mail'] : array();
+		$swfpmail = sanitize_text_field($_POST['wfp-mail']);
+		$args['mail'] = isset( $swfpmail )
+			? $swfpmail : array();
 
-		$args['mail_2'] = isset( $_POST['wfp-mail-2'] )
-			? $_POST['wfp-mail-2'] : array();
+		$swfpmail2 = sanitize_text_field($_POST['wfp-mail-2']);
+		$args['mail_2'] = isset( $swfpmail2 )
+			? $swfpmail2 : array();
 
-		$args['messages'] = isset( $_POST['wfp-messages'] )
-			? $_POST['wfp-messages'] : array();
+		$swfpmessages = sanitize_text_field($_POST['wfp-messages']);
+		$args['messages'] = isset( $swfpmessages )
+			? $swfpmessages : array();
 
-		$args['additional_settings'] = isset( $_POST['wfp-additional-settings'] )
-			? $_POST['wfp-additional-settings'] : '';
+		$swfpadditionalsettings = sanitize_text_field($_POST['wfp-additional-settings']);
+		$args['additional_settings'] = isset( $swfpadditionalsettings )
+			? $swfpadditionalsettings : '';
 
 		$wing_form = wfp_save_wing_form( $args );
 
@@ -250,10 +262,12 @@ function wfp_load_wing_form_admin() {
 			$config_validator->save();
 		}
 
+		$sactivetab = sanitize_text_field($_POST['active-tab']);
+
 		$query = array(
 			'post' => $wing_form ? $wing_form->id() : 0,
-			'active-tab' => isset( $_POST['active-tab'] )
-				? (int) $_POST['active-tab'] : 0,
+			'active-tab' => isset( $sactivetab )
+				? (int) $sactivetab : 0,
 		);
 
 		if ( ! $wing_form ) {
@@ -269,10 +283,12 @@ function wfp_load_wing_form_admin() {
 		exit();
 	}
 
+	$spost_ID = sanitize_text_field(['post_ID']);
+
 	if ( 'copy' == $action ) {
-		$id = empty( $_POST['post_ID'] )
+		$id = empty( $spost_ID )
 			? absint( $_REQUEST['post'] )
-			: absint( $_POST['post_ID'] );
+			: absint( $spost_ID );
 
 		check_admin_referer( 'wfp-copy-wing-form_' . $id );
 
@@ -299,17 +315,17 @@ function wfp_load_wing_form_admin() {
 	}
 
 	if ( 'delete' == $action ) {
-		if ( ! empty( $_POST['post_ID'] ) ) {
-			check_admin_referer( 'wfp-delete-wing-form_' . $_POST['post_ID'] );
+		if ( ! empty( $spost_ID ) ) {
+			check_admin_referer( 'wfp-delete-wing-form_' . $spost_ID );
 		} elseif ( ! is_array( $_REQUEST['post'] ) ) {
 			check_admin_referer( 'wfp-delete-wing-form_' . $_REQUEST['post'] );
 		} else {
 			check_admin_referer( 'bulk-posts' );
 		}
 
-		$posts = empty( $_POST['post_ID'] )
+		$posts = empty( $spost_ID )
 			? (array) $_REQUEST['post']
-			: (array) $_POST['post_ID'];
+			: (array) $spost_ID;
 
 		$deleted = 0;
 
@@ -348,8 +364,9 @@ function wfp_load_wing_form_admin() {
 	$post = null;
 
 	if ( 'wfp-new' == $plugin_page ) {
+		$slocale = sanitize_text_field($_GET['locale']);
 		$post = WFP_WingForm::get_template( array(
-			'locale' => isset( $_GET['locale'] ) ? $_GET['locale'] : null,
+			'locale' => isset( $slocale ) ? $slocale : null,
 		) );
 	} elseif ( ! empty( $_GET['post'] ) ) {
 		$post = WFP_WingForm::get_instance( $_GET['post'] );
@@ -469,8 +486,11 @@ function wfp_admin_add_new_page() {
 
 
 function wfp_load_integration_page() {
+
+	$spage = sanitize_text_field($_GET['page']);
+
 	do_action( 'wfp_admin_load',
-		isset( $_GET['page'] ) ? trim( $_GET['page'] ) : '',
+		isset( $_GET['page'] ) ? trim( $spage ) : '',
 		wfp_current_action()
 	);
 

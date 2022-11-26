@@ -221,8 +221,11 @@ class WFP_RECAPTCHA extends WFP_Service {
 				$this->reset_data();
 				$redirect_to = $this->menu_page_url( 'action=setup' );
 			} else {
-				$sitekey = isset( $_POST['sitekey'] ) ? trim( $_POST['sitekey'] ) : '';
-				$secret = isset( $_POST['secret'] ) ? trim( $_POST['secret'] ) : '';
+				$ssitekey = sanitize_text_field($_POST['sitekey']);
+				$sitekey = isset( $ssitekey  ) ? trim( $ssitekey  ) : '';
+
+				$ssecret = sanitize_text_field($_POST['secret']);
+				$secret = isset( $ssecret ) ? trim( $ssecret ) : '';
 
 				if ( $sitekey and $secret ) {
 					$this->sitekeys = array( $sitekey => $secret );

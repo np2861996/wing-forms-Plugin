@@ -18,7 +18,8 @@ class WFP_SWV_MaxDateRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_POST[$field] ) ? $_POST[$field] : '';
+		$sinput_field2 = sanitize_text_field($_POST[$field]);
+		$input = isset( $sinput_field2 ) ? $sinput_field2 : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 

@@ -9,7 +9,7 @@ function wfp_admin_save_button( $post_id ) {
 	static $button = '';
 
 	if ( ! empty( $button ) ) {
-		echo $button;
+		echo esc_attr($button);
 		return;
 	}
 
@@ -26,7 +26,7 @@ function wfp_admin_save_button( $post_id ) {
 		esc_attr( __( 'Save', 'wing-forms' ) ),
 		$onclick );
 
-	echo $button;
+	echo esc_attr($button);
 }
 
 ?><div class="wrap" id="wfp-wing-form-editor">
