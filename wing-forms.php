@@ -11,7 +11,7 @@
  * @author BeyondN
  */
 
-define( 'WFP_VERSION', '5.6.4' );
+define( 'WFP_VERSION', '1.0.0' );
 
 define( 'WFP_REQUIRED_WP_VERSION', '5.9' );
 
