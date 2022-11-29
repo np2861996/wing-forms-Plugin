@@ -167,8 +167,11 @@ function wfp_captcha_validation_filter( $result, $tag ) {
 
 	$captchac = '_wfp_captcha_challenge_' . $name;
 	
-	$prefix = isset( $_POST[$captchac] ) ? (string) $_POST[$captchac] : '';
-	$response = isset( $_POST[$name] ) ? (string) $_POST[$name] : '';
+	$spostcaptchac = sanitize_text_field($_POST[$captchac]);
+	$postname = sanitize_text_field($_POST[$name]); 
+	
+	$prefix = isset( $spostcaptchac ) ? (string) $spostcaptchac : '';
+	$response = isset( $postname ) ? (string) $postname : '';
 	$response = wfp_canonicalize( $response );
 
 	if ( 0 === strlen( $prefix )

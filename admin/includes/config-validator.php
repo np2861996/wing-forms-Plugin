@@ -57,10 +57,13 @@ function wfp_admin_warnings_bulk_cv( $page, $action, $object ) {
 add_action( 'wfp_admin_load', 'wfp_load_bulk_validate_page', 10, 2 );
 
 function wfp_load_bulk_validate_page( $page, $action ) {
+
+	$sREQUEST_METHOD = sanitize_text_field($_SERVER['REQUEST_METHOD']);
+
 	if ( 'wfp' != $page
 	or 'validate' != $action
 	or ! wfp_validate_configuration()
-	or 'POST' != $_SERVER['REQUEST_METHOD'] ) {
+	or 'POST' != $sREQUEST_METHOD ) {
 		return;
 	}
 

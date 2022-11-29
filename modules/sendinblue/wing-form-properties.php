@@ -38,8 +38,10 @@ function wfp_sendinblue_save_wing_form( $wing_form, $args, $context ) {
 		return;
 	}
 
-	$prop = isset( $_POST['wfp-sendinblue'] )
-		? (array) $_POST['wfp-sendinblue']
+	$swfpsendinblue = sanitize_text_field($_POST['wfp-sendinblue']);
+
+	$prop = isset( $swfpsendinblue )
+		? (array) $swfpsendinblue
 		: array();
 
 	$prop = wp_parse_args(

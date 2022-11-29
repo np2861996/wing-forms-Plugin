@@ -290,19 +290,25 @@ class WFP_Submission {
 
 		$remote_ip = $this->get_remote_ip_addr();
 
-		$remote_port = isset( $_SERVER['REMOTE_PORT'] )
-			? (int) $_SERVER['REMOTE_PORT'] : '';
+		$sREMOTE_PORT = sanitize_text_field($_SERVER['REMOTE_PORT']);
 
-		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] )
-			? substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 ) : '';
+		$remote_port = isset( $sREMOTE_PORT )
+			? (int) $sREMOTE_PORT : '';
+
+		$sHTTP_USER_AGENT = sanitize_text_field($_SERVER['HTTP_USER_AGENT']);
+
+		$user_agent = isset( $sHTTP_USER_AGENT )
+			? substr( $sHTTP_USER_AGENT, 0, 254 ) : '';
 
 		$url = $this->get_request_url();
 
 		$unit_tag = isset( $_POST['_wfp_unit_tag'] )
 			? wfp_sanitize_unit_tag( $_POST['_wfp_unit_tag'] ) : '';
 
-		$container_post_id = isset( $_POST['_wfp_container_post'] )
-			? (int) $_POST['_wfp_container_post'] : 0;
+		$s_wfp_container_post = wfp_sanitize_unit_tag($_POST['_wfp_container_post']);
+
+		$container_post_id = isset( $s_wfp_container_post )
+			? (int) $s_wfp_container_post : 0;
 
 		$current_user_id = get_current_user_id();
 
@@ -579,7 +585,7 @@ class WFP_Submission {
 
 		if ( isset( $_SERVER['REMOTE_ADDR'] )
 		and WP_Http::is_ip_address( $_SERVER['REMOTE_ADDR'] ) ) {
-			$ip_addr = $_SERVER['REMOTE_ADDR'];
+			$ip_addr = sanitize_text_field($_SERVER['REMOTE_ADDR']);
 		}
 
 		return apply_filters( 'wfp_remote_ip_addr', $ip_addr );
@@ -592,9 +598,11 @@ class WFP_Submission {
 	private function get_request_url() {
 		$home_url = untrailingslashit( home_url() );
 
+		$sHTTP_REFERER = sanitize_text_field($_SERVER['HTTP_REFERER']);
+
 		if ( self::is_restful() ) {
-			$referer = isset( $_SERVER['HTTP_REFERER'] )
-				? trim( $_SERVER['HTTP_REFERER'] ) : '';
+			$referer = isset( $sHTTP_REFERER )
+				? trim( $sHTTP_REFERER ) : '';
 
 			if ( $referer
 			and 0 === strpos( $referer, $home_url ) ) {
@@ -895,7 +903,7 @@ class WFP_Submission {
 				continue;
 			}
 
-			$file = $_FILES[$tag->name];
+			$file = sanitize_text_field($_FILES[$tag->name]);
 
 			$args = array(
 				'tag' => $tag,

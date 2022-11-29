@@ -98,16 +98,20 @@ add_filter( 'wfp_validate_quiz', 'wfp_quiz_validation_filter', 10, 2 );
 function wfp_quiz_validation_filter( $result, $tag ) {
 	$name = $tag->name;
 
-	$answer = isset( $_POST[$name] ) ? wp_unslash( $_POST[$name] ) : '';
+	$spostname = sanitize_text_field($_POST[$name]);
+
+	$answer = isset( $spostname ) ? wp_unslash( $spostname ) : '';
 
 	$answer = wfp_canonicalize( $answer, array(
 		'strip_separators' => true,
 	) );
 
 	$answer_hash = wp_hash( $answer, 'wfp_quiz' );
+
+	$s_wfp_quiz_answer = sanitize_text_field($_POST['_wfp_quiz_answer_' . $name]);
  
-	$expected_hash = isset( $_POST['_wfp_quiz_answer_' . $name] )
-		? (string) $_POST['_wfp_quiz_answer_' . $name]
+	$expected_hash = isset( $s_wfp_quiz_answer  )
+		? (string) $s_wfp_quiz_answer 
 		: '';
 
 	if ( ! hash_equals( $expected_hash, $answer_hash ) ) {

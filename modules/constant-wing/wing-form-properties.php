@@ -111,8 +111,10 @@ function wfp_constant_wing_save_wing_form( $wing_form ) {
 		return;
 	}
 
-	$prop = isset( $_POST['wfp-ctct'] )
-		? (array) $_POST['wfp-ctct']
+	$swfpctct = sanitize_text_field($_POST['wfp-ctct']);
+
+	$prop = isset( $swfpctct )
+		? (array) $swfpctct
 		: array();
 
 	$prop = wp_parse_args(

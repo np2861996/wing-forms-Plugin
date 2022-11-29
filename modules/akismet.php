@@ -31,9 +31,9 @@ function wfp_akismet( $spam, $submission ) {
 	$c['blog'] = get_option( 'home' );
 	$c['blog_lang'] = get_locale();
 	$c['blog_charset'] = get_option( 'blog_charset' );
-	$c['user_ip'] = $_SERVER['REMOTE_ADDR'];
-	$c['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-	$c['referrer'] = $_SERVER['HTTP_REFERER'];
+	$c['user_ip'] = sanitize_text_field($_SERVER['REMOTE_ADDR']);
+	$c['user_agent'] = sanitize_text_field($_SERVER['HTTP_USER_AGENT']);
+	$c['referrer'] = sanitize_text_field($_SERVER['HTTP_REFERER']);
 	$c['comment_type'] = 'wing-form';
 
 	$datetime = date_create_immutable(

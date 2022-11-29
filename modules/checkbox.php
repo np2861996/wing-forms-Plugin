@@ -157,7 +157,10 @@ function wfp_checkbox_form_tag_handler( $tag ) {
 
 				if ( wfp_is_posted()
 				and isset( $_POST[$free_text_name] ) ) {
-					$free_text_atts['value'] = wp_unslash( $_POST[$free_text_name] );
+
+					$sfree_text_name = sanitize_text_field($_POST[$free_text_name]);
+
+					$free_text_atts['value'] = wp_unslash( $sfree_text_name );
 				}
 
 				$free_text_atts = wfp_format_atts( $free_text_atts );

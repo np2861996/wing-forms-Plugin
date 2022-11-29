@@ -133,8 +133,6 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 		WFP_VERSION, true
 	);
 
-	$sactivetab = sanitize_text_field($_GET['active-tab']);
-
 	$args = array(
 		'apiSettings' => array(
 			'root' => esc_url_raw( rest_url( 'wing-forms/v1' ) ),
@@ -146,7 +144,7 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 		'saveAlert' => __(
 			"The changes you made will be lost if you navigate away from this page.",
 			'wing-forms' ),
-		'activeTab' => isset( $sactivetab )
+		'activeTab' => isset( $_GET['active-tab'] )
 			? (int) $sactivetab : 0,
 		'configValidator' => array(
 			'errors' => array(),

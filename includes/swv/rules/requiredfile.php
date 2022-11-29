@@ -20,7 +20,7 @@ class WFP_SWV_RequiredFileRule extends WFP_SWV_Rule {
 		$field = $this->get_property( 'field' );
 
 		$input = isset( $_FILES[$field]['tmp_name'] )
-			? $_FILES[$field]['tmp_name'] : '';
+			? sanitize_text_field($_FILES[$field]['tmp_name']) : '';
 
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );

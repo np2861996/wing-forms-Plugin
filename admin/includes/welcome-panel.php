@@ -31,8 +31,8 @@ abstract class WFP_WelcomePanelColumn {
 
 		echo "\n";
 		echo '<div class="welcome-panel-column">';
-		echo esc_html($title);
-		echo esc_html($content);
+		echo $title;
+		echo $content;
 		echo '</div>';
 	}
 }

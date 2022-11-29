@@ -18,7 +18,7 @@ class WFP_SWV_MaxFileSizeRule extends WFP_SWV_Rule {
 
 	public function validate( $context ) {
 		$field = $this->get_property( 'field' );
-		$input = isset( $_FILES[$field]['size'] ) ? $_FILES[$field]['size'] : '';
+		$input = isset( $_FILES[$field]['size'] ) ? sanitize_text_field($_FILES[$field]['size']) : '';
 		$input = wfp_array_flatten( $input );
 		$input = wfp_exclude_blank( $input );
 
