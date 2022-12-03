@@ -31,8 +31,8 @@ abstract class WFP_WelcomePanelColumn {
 
 		echo "\n";
 		echo '<div class="welcome-panel-column">';
-		echo $title;
-		echo $content;
+		echo wp_kses_post($title);
+		echo wp_kses_post($content);
 		echo '</div>';
 	}
 }

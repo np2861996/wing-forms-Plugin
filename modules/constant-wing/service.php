@@ -144,8 +144,20 @@ class WFP_ConstantWing extends WFP_Service_OAuth2 {
 
 	public function load( $action = '' ) {
 		if ( 'auth_redirect' == $action ) {
-			$code = isset( $_GET['code'] ) ? urldecode( $_GET['code'] ) : '';
-			$state = isset( $_GET['state'] ) ? urldecode( $_GET['state'] ) : '';
+
+			if(isset($_GET['code']))
+			{
+				$code = sanitize_text_field($_GET['code']);
+			}
+
+			if(isset($_GET['state']))
+			{
+				$state  = sanitize_text_field($_GET['state']);
+			}
+			
+
+			$code = isset( $code ) ? urldecode( $code ) : '';
+			$state = isset( $state ) ? urldecode( $state ) : '';
 
 			if ( $code and $state
 			and wfp_verify_nonce( $state, 'wfp_constant_wing_authorize' ) ) {

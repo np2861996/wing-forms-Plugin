@@ -66,14 +66,14 @@ function wfp_editor_panel_form( $post ) {
 <h2><?php echo esc_html( __( 'Form', 'wing-forms' ) ); ?></h2>
 
 <fieldset>
-<legend><?php echo esc_html($description); ?></legend>
+<legend><?php echo wp_kses_post($description); ?></legend>
 
 <?php
 	$tag_generator = WFP_TagGenerator::get_instance();
 	$tag_generator->print_buttons();
 ?>
 
-<textarea id="wfp-form" name="wfp-form" cols="100" rows="24" class="large-text code" data-config-field="form.body"><?php echo esc_textarea( $post->prop( 'form' ) ); ?></textarea>
+<textarea id="wfp-form" name="wfp-form" cols="100" rows="24" class="large-text code" data-config-field="form.body"><?php echo $post->prop( 'form' ); ?></textarea>
 </fieldset>
 <?php
 }
@@ -134,7 +134,7 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 		__( 'Setting up mail', 'wing-forms' ) );
 	$description = __( "You can edit the mail template here. For details, see %s.", 'wing-forms' );
 	$description = sprintf( esc_html( $description ), $desc_link );
-	echo esc_html($description);
+	echo $description;
 	echo '<br />';
 
 	echo esc_html( __( "In the following fields, you can use these mail-tags:",
@@ -147,7 +147,7 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 <tbody>
 	<tr>
 	<th scope="row">
-		<label for="<?php echo esc_attr($id); ?>-recipient"><?php echo esc_html( __( 'To', 'wing-forms' ) ); ?></label>
+		<label for="<?php echo esc_attr($id); ?>-recipient"><?php echo  __( 'To', 'wing-forms' ) ; ?></label>
 	</th>
 	<td>
 		<input type="text" id="<?php echo esc_attr($id); ?>-recipient" name="<?php echo esc_attr($id); ?>[recipient]" class="large-text code" size="70" value="<?php echo esc_attr( $mail['recipient'] ); ?>" data-config-field="<?php echo sprintf( '%s.recipient', esc_attr( $args['name'] ) ); ?>" />
@@ -257,7 +257,7 @@ function wfp_editor_panel_additional_settings( $post ) {
 <h2><?php echo esc_html( __( 'Additional Settings', 'wing-forms' ) ); ?></h2>
 <fieldset>
 <legend><?php echo esc_attr($description); ?></legend>
-<textarea id="wfp-additional-settings" name="wfp-additional-settings" cols="100" rows="8" class="large-text" data-config-field="additional_settings.body"><?php echo esc_textarea( $post->prop( 'additional_settings' ) ); ?></textarea>
+<textarea id="wfp-additional-settings" name="wfp-additional-settings" cols="100" rows="8" class="large-text" data-config-field="additional_settings.body"><?php echo  $post->prop( 'additional_settings' ) ; ?></textarea>
 </fieldset>
 <?php
 }

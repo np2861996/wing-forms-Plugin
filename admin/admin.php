@@ -133,6 +133,11 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 		WFP_VERSION, true
 	);
 
+	if(isset($_GET['active-tab']))
+	{
+		$showactivetab = sanitize_text_field($_GET['active-tab']);
+	}
+
 	$args = array(
 		'apiSettings' => array(
 			'root' => esc_url_raw( rest_url( 'wing-forms/v1' ) ),
@@ -145,7 +150,7 @@ function wfp_admin_enqueue_scripts( $hook_suffix ) {
 			"The changes you made will be lost if you navigate away from this page.",
 			'wing-forms' ),
 		'activeTab' => isset( $_GET['active-tab'] )
-			? (int) $sactivetab : 0,
+			? (int) $showactivetab : 0,
 		'configValidator' => array(
 			'errors' => array(),
 			'howToCorrect' => __( "How to resolve?", 'wing-forms' ),
@@ -362,7 +367,11 @@ function wfp_load_wing_form_admin() {
 	$post = null;
 
 	if ( 'wfp-new' == $plugin_page ) {
-		$slocale = sanitize_text_field($_GET['locale']);
+		if(isset($_GET['locale']))
+		{
+			$slocale = sanitize_text_field($_GET['locale']);
+		}
+		
 		$post = WFP_WingForm::get_template( array(
 			'locale' => isset( $slocale ) ? $slocale : null,
 		) );
@@ -538,7 +547,7 @@ function wfp_admin_integration_page() {
 	);
 
 	if ( $service ) {
-		$message = isset( $_REQUEST['message'] ) ? $_REQUEST['message'] : '';
+		$message = isset( $_REQUEST['message'] ) ? sanitize_text_field($_REQUEST['message']) : '';
 		$service->admin_notice( $message );
 
 		$integration->list_services( array(
