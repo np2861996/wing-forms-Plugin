@@ -38,7 +38,7 @@ class WFP_Wing_Form_List_Table extends WP_List_Table {
 		);
 
 		if ( ! empty( $_REQUEST['s'] ) ) {
-			$args['s'] = $_REQUEST['s'];
+			$args['s'] = sanitize_text_field($_REQUEST['s']);
 		}
 
 		if ( ! empty( $_REQUEST['orderby'] ) ) {

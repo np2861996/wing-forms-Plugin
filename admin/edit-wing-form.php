@@ -9,11 +9,11 @@ function wfp_admin_save_button( $post_id ) {
 	static $button = '';
 
 	if ( ! empty( $button ) ) {
-		echo __($button, 'wing-forms');
+		echo esc_html($button);
 		return;
 	}
 
-	$nonce = wp_create_nonce( 'wfp-save-wing-form_' . $post_id );
+	$nonce = wp_create_nonce( 'wfp-save-wing-form_' . $post_id ); 
 
 	$onclick = sprintf(
 		"this.form._wpnonce.value = '%s';"
@@ -26,7 +26,7 @@ function wfp_admin_save_button( $post_id ) {
 		esc_attr( __( 'Save', 'wing-forms' ) ),
 		$onclick );
 
-	echo $button;
+	echo esc_html($button);
 }
 
 ?><div class="wrap" id="wfp-wing-form-editor">

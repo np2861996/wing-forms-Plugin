@@ -226,7 +226,7 @@ function wfp_load_wing_form_admin() {
 			);
 		}
 
-		$args = $_REQUEST;
+		$args = sanitize_text_field($_REQUEST);
 		$args['id'] = $id;
 
 		$spost_title = sanitize_text_field($_POST['post_title']);
@@ -418,7 +418,7 @@ function wfp_admin_management_page() {
 
 	if ( 'validate' == wfp_current_action()
 	and wfp_validate_configuration()
-	and current_user_can( 'wfp_edit_wing_forms' ) ) {
+	and current_user_can( 'wfp_edit_wing_forms' ) ) { 
 		wfp_admin_bulk_validate_page();
 		return;
 	}
@@ -550,8 +550,10 @@ function wfp_admin_integration_page() {
 		$message = isset( $_REQUEST['message'] ) ? sanitize_text_field($_REQUEST['message']) : '';
 		$service->admin_notice( $message );
 
+		$sservice =  sanitize_text_field($_REQUEST['service']);
+
 		$integration->list_services( array(
-			'include' => $_REQUEST['service'],
+			'include' => $sservice,
 		) );
 	} else {
 		$integration->list_services();

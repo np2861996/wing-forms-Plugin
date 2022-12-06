@@ -58,7 +58,7 @@ class WFP_ConstantWing extends WFP_Service_OAuth2 {
 
 	public function auth_redirect() {
 		if(isset( $_GET['auth'])){
-			$sauth = sanitize_text_field($_GET['auth']);
+			$sauth = sanitize_text_field($_GET['auth']); 
 		}
 		$auth = isset( $sauth ) ? trim( $sauth ) : '';
 		

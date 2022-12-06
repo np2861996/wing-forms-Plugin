@@ -12,7 +12,7 @@ abstract class WFP_WelcomePanelColumn {
 			esc_attr( $this->icon() )
 		);
 
-		$title = sprintf(
+		$title = sprintf( 
 			'<h3>%1$s %2$s</h3>',
 			$icon,
 			$this->title()

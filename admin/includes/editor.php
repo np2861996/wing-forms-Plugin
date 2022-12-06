@@ -140,7 +140,7 @@ function wfp_editor_box_mail( $post, $args = '' ) {
 	echo esc_html( __( "In the following fields, you can use these mail-tags:",
 		'wing-forms' ) );
 	echo '<br />';
-	$post->suggest_mail_tags( $args['name'] );
+	$post->suggest_mail_tags( $args['name'] ); 
 ?>
 </legend>
 <table class="form-table">
